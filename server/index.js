@@ -7,14 +7,6 @@ const app = express()
 require("dotenv").config({ path: './.env' })
 
 
-// Connect Database
-mongoose.connect(process.env.MONGO_URL)
-    .then(() => console.log("MongoDB Connection Initiated"))
-    .catch(err => {
-        console.error("MongoDB Connection Error:", err);
-        // Optional: Still start server or exit? Better to know.
-    })
-
 // MiddleWares => to access the data of body
 app.use(express.json())
 
@@ -49,15 +41,23 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 // Error Handlers
-app.use((err, req, res, next) => {
-    console.log(err)
-    res.status(500).json({ message: err.message || "something went wrong" })
-})
+// Error Handlers
+app.use(require('./middleware/errorMiddleware'));
 
 
+// Connect Database and Start Server
+const startServer = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URL);
+        console.log("MongoDB Connection Initiated");
 
-// Connect to the server
-mongoose.connection.once("open", () => {
-    console.log("Mongo Conncted");
-    app.listen(process.env.PORT, console.log(`Server Running : http://localhost:${process.env.PORT}`))
-})
+        app.listen(process.env.PORT, () => {
+            console.log(`Server Running : http://localhost:${process.env.PORT}`);
+        });
+    } catch (err) {
+        console.error("MongoDB Connection Error:", err);
+        process.exit(1);
+    }
+};
+
+startServer();

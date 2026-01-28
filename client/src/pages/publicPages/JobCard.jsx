@@ -1,34 +1,32 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useGetAllJobsQuery } from '../../redux/api/userApi';
+import { useJobs } from '../../hooks/useJobs';
 import { FaMapMarkerAlt, FaMoneyBillWave, FaBriefcase, FaCalendarAlt, FaSearch } from 'react-icons/fa';
+import Loading from '../../components/ui/Loading';
+import EmptyState from '../../components/ui/EmptyState';
+import ErrorState from '../../components/ui/ErrorState';
 
 const JobCard = ({ isHomePage = true }) => {
-    const { user } = useSelector(state => state.user)
-    let { data, isLoading } = useGetAllJobsQuery();
+    const { user } = useSelector(state => state.user);
+    const { data: jobs, isLoading, isError, error } = useJobs();
     const [searchTerm, setSearchTerm] = useState('');
     const [filterLocation, setFilterLocation] = useState('');
 
     // Filter Logic
-    const filteredJobs = data?.filter(job => {
-        const matchesSearch = job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    const filteredJobs = jobs?.filter(job => {
+        const matchesSearch = job.jobTitle?.toLowerCase().includes(searchTerm.toLowerCase()) ||
             (job.company && job.company.toLowerCase().includes(searchTerm.toLowerCase()));
-        const matchesLocation = filterLocation ? job.location.toLowerCase().includes(filterLocation.toLowerCase()) : true;
+        const matchesLocation = filterLocation ? job.location?.toLowerCase().includes(filterLocation.toLowerCase()) : true;
 
         return matchesSearch && matchesLocation;
     }) || [];
 
     // On Home Page, limit to 6. On Job Section, show all (or filtered).
-    const displayJobs = isHomePage ? (data ? data.slice(0, 6) : []) : filteredJobs;
+    const displayJobs = isHomePage ? (filteredJobs.slice(0, 6) || []) : filteredJobs;
 
-    if (isLoading) {
-        return (
-            <div className="flex justify-center items-center py-20">
-                <span className="loading loading-spinner loading-lg text-primary"></span>
-            </div>
-        );
-    }
+    if (isLoading) return <Loading />;
+    if (isError) return <div className="container mx-auto px-4"><ErrorState message={error?.message || "Failed to load jobs."} /></div>;
 
     return (
         <section className={`py-16 ${isHomePage ? 'bg-gray-50' : 'bg-white'}`}>
@@ -78,7 +76,7 @@ const JobCard = ({ isHomePage = true }) => {
                                     <div className="flex justify-between items-start mb-2">
                                         <div className="badge badge-primary badge-outline mb-2">{item.jobRole || 'Software'}</div>
                                         <span className="text-xs text-gray-400 flex items-center gap-1">
-                                            <FaCalendarAlt /> {new Date(item.createdAt).toLocaleDateString()}
+                                            <FaCalendarAlt /> {item.createdAt ? new Date(item.createdAt).toLocaleDateString() : 'Recent'}
                                         </span>
                                     </div>
 
@@ -102,7 +100,7 @@ const JobCard = ({ isHomePage = true }) => {
 
                                     <div className="card-actions justify-end mt-auto pt-4 border-t border-gray-100">
                                         {user && (user.role === "user") ? (
-                                            <Link to='/jobDetails' className="btn btn-primary btn-sm w-full rounded-full">Apply Now</Link>
+                                            <Link to={`/jobDetails/${item._id}`} className="btn btn-primary btn-sm w-full rounded-full">Apply Now</Link>
                                         ) : (
                                             <Link to='/userLogin' className='btn btn-outline btn-sm w-full rounded-full'>Login to Apply</Link>
                                         )}
@@ -112,17 +110,11 @@ const JobCard = ({ isHomePage = true }) => {
                         ))}
                     </div>
                 ) : (
-                    <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-gray-300">
-                        <div className="text-gray-400 text-5xl mb-4">
-                            <FaSearch className="mx-auto" />
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-700">No jobs found</h3>
-                        <p className="text-gray-500 mt-2">Try adjusting your search criteria or come back later.</p>
-                    </div>
+                    <EmptyState message="No jobs found matching your criteria." />
                 )}
 
                 {/* View All Button (Only on Home Page) */}
-                {isHomePage && (
+                {isHomePage && displayJobs.length > 0 && (
                     <div className="text-center mt-12">
                         <Link to="/jobSection" className="btn btn-outline px-8 rounded-full">View All Jobs</Link>
                     </div>

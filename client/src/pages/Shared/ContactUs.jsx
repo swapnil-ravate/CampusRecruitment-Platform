@@ -1,18 +1,25 @@
 import React, { useState } from 'react'
 import Navbar from '../../Component/Navbar'
 import Footer from '../../Component/Footer'
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock, FaPaperPlane, FaLinkedin, FaTwitter, FaFacebook, FaPlus, FaMinus, FaQuestionCircle, FaArrowRight, FaUser } from 'react-icons/fa'
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaPaperPlane, FaLinkedin, FaTwitter, FaFacebook, FaPlus, FaMinus, FaQuestionCircle, FaArrowRight, FaUser } from 'react-icons/fa'
 import { MdOutlineSubject } from 'react-icons/md'
 import { toast } from 'react-hot-toast'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+
+// Zod Schema
+const contactSchema = z.object({
+    name: z.string().min(2, "Name must be at least 2 characters"),
+    email: z.string().email("Invalid email address"),
+    subject: z.string().min(1, "Please select a subject"),
+    message: z.string().min(10, "Message must be at least 10 characters"),
+});
 
 const ContactUs = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
+        resolver: zodResolver(contactSchema),
     });
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [activeFaq, setActiveFaq] = useState(null);
 
     const faqs = [
@@ -34,20 +41,11 @@ const ContactUs = () => {
         }
     ];
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.id]: e.target.value });
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-
+    const onSubmit = async (data) => {
         // Simulate API call
-        setTimeout(() => {
-            toast.success("Message sent successfully! We will get back to you soon.");
-            setFormData({ name: '', email: '', subject: '', message: '' });
-            setIsSubmitting(false);
-        }, 1500);
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        toast.success("Message sent successfully! We will get back to you soon.");
+        reset();
     };
 
     const toggleFaq = (index) => {
@@ -145,7 +143,7 @@ const ContactUs = () => {
                             <h3 className="text-3xl font-semibold text-gray-900 mb-2 relative z-10">Send us a Message</h3>
                             <p className="text-gray-500 mb-10 text-lg relative z-10">We aim to respond to all inquiries within 24 business hours.</p>
 
-                            <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
+                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 relative z-10">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-3">
                                         <label htmlFor="name" className="text-sm font-semibold text-gray-700 uppercase tracking-widest pl-1">Full Name</label>
@@ -154,13 +152,12 @@ const ContactUs = () => {
                                             <input
                                                 type="text"
                                                 id="name"
-                                                value={formData.name}
-                                                onChange={handleChange}
                                                 placeholder="Your name"
-                                                className="w-full pl-14 pr-6 py-4.5 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-300 font-medium"
-                                                required
+                                                {...register("name")}
+                                                className={`w-full pl-14 pr-6 py-4.5 rounded-2xl bg-gray-50 border-2 ${errors.name ? 'border-error' : 'border-transparent'} focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-300 font-medium`}
                                             />
                                         </div>
+                                        {errors.name && <p className="text-error text-xs pl-1">{errors.name.message}</p>}
                                     </div>
                                     <div className="space-y-3">
                                         <label htmlFor="email" className="text-sm font-semibold text-gray-700 uppercase tracking-widest pl-1">Email Address</label>
@@ -169,13 +166,12 @@ const ContactUs = () => {
                                             <input
                                                 type="email"
                                                 id="email"
-                                                value={formData.email}
-                                                onChange={handleChange}
                                                 placeholder="hello@example.com"
-                                                className="w-full pl-14 pr-6 py-4.5 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-300 font-medium"
-                                                required
+                                                {...register("email")}
+                                                className={`w-full pl-14 pr-6 py-4.5 rounded-2xl bg-gray-50 border-2 ${errors.email ? 'border-error' : 'border-transparent'} focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-300 font-medium`}
                                             />
                                         </div>
+                                        {errors.email && <p className="text-error text-xs pl-1">{errors.email.message}</p>}
                                     </div>
                                 </div>
 
@@ -185,10 +181,8 @@ const ContactUs = () => {
                                         <MdOutlineSubject className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 text-xl group-focus-within/input:text-blue-600 transition-colors pointer-events-none" />
                                         <select
                                             id="subject"
-                                            value={formData.subject}
-                                            onChange={handleChange}
-                                            className="w-full pl-14 pr-12 py-4.5 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-gray-600 appearance-none font-medium cursor-pointer"
-                                            required
+                                            {...register("subject")}
+                                            className={`w-full pl-14 pr-12 py-4.5 rounded-2xl bg-gray-50 border-2 ${errors.subject ? 'border-error' : 'border-transparent'} focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-gray-600 appearance-none font-medium cursor-pointer`}
                                         >
                                             <option value="">Select a topic</option>
                                             <option value="Placement">Placement Queries</option>
@@ -200,6 +194,7 @@ const ContactUs = () => {
                                             <FaArrowRight className="rotate-90 text-[10px]" />
                                         </div>
                                     </div>
+                                    {errors.subject && <p className="text-error text-xs pl-1">{errors.subject.message}</p>}
                                 </div>
 
                                 <div className="space-y-3">
@@ -209,13 +204,12 @@ const ContactUs = () => {
                                         <textarea
                                             id="message"
                                             rows="6"
-                                            value={formData.message}
-                                            onChange={handleChange}
                                             placeholder="Tell us how we can help you..."
-                                            className="w-full pl-14 pr-6 py-5 rounded-2xl bg-gray-50 border-2 border-transparent focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-300 resize-none font-medium"
-                                            required
+                                            {...register("message")}
+                                            className={`w-full pl-14 pr-6 py-5 rounded-2xl bg-gray-50 border-2 ${errors.message ? 'border-error' : 'border-transparent'} focus:bg-white focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition-all placeholder-gray-300 resize-none font-medium`}
                                         ></textarea>
                                     </div>
+                                    {errors.message && <p className="text-error text-xs pl-1">{errors.message.message}</p>}
                                 </div>
 
                                 <button

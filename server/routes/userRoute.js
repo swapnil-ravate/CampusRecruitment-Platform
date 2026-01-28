@@ -1,12 +1,15 @@
-const { getAllJobs, updateUserProfile, getUserProfile } = require('../controllers/userController')
-const { userVerification } = require('../middleware/authMiddleWare') // Assuming this exists or will implement/check
+const { getAllJobs, updateUserProfile, getUserProfile, getJobById } = require('../controllers/userController')
+const { userVerification } = require('../middleware/authMiddleWare')
+const validate = require('../middleware/validate')
+const { updateProfileSchema, jobIdSchema } = require('../validations/userValidation')
 
 const router = require('express').Router()
 
 router
     .get("/getJobs", getAllJobs)
-    .use(userVerification) // Protect subsequent routes
-    .put("/updateProfile", updateUserProfile)
+    .get("/getJob/:id", validate(jobIdSchema), getJobById)
+    .use(userVerification)
+    .put("/updateProfile", validate(updateProfileSchema), updateUserProfile)
     .get("/profile/:id", getUserProfile)
 
-module.exports = router    
+module.exports = router

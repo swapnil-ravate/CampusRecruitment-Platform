@@ -5,47 +5,40 @@ const validator = require("validator")
 const User = require("../models/user")
 
 exports.register = asyncHandler(async (req, res) => {
+    // Validation handled by middleware
     const { name, email, password, role, number } = req.body
-    if (!validator.isEmail(email)) {
-        return res.status(400).json({ message: "Please provide valid email" })
-    }
 
-    if (!name) {
-        return res.status(400).json({ message: "please enter Name" })
-    }
-    if (!number) {
-        return res.status(400).json({ message: "enter a valid number" })
-    }
     const result = await User.findOne({ email })
     if (result) {
-        return res.status(400).json({ message: "User already exists" })
+        return res.status(409).json({ message: "User already exists" })
     }
     const hashPass = await bcrypt.hash(password, 10)
-    await User.create({ ...req.body, password: hashPass })
-    res.status(201).json({ message: "user Register Success" })
+    await User.create({ ...req.body, role: role || 'student', password: hashPass })
+    res.status(201).json({ message: "User Register Success" })
 })
 
 exports.login = asyncHandler(async (req, res) => {
     const { email, password } = req.body
-    if (!email || !password) {
-        return res.status(400).json({ message: "email and password required" })
-    }
-    if (!validator.isEmail(email)) {
-        return res.status(400).json({ message: "please enter valid email" })
-    }
 
     const result = await User.findOne({ email })
     if (!result) {
-        return res.status(400).json({ message: "Email is not registerd with us" })
+        return res.status(401).json({ message: "Invalid email or password" })
     }
 
     const verify = await bcrypt.compare(password, result.password)
     if (!verify) {
-        return res.status(400).json({ message: "password do not match" })
+        return res.status(401).json({ message: "Invalid email or password" })
     }
 
     const token = jwt.sign({ userId: result._id }, process.env.JWT_KEY, { expiresIn: "1d" })
-    res.cookie('userAuth', token, { maxAge: 1000 * 60 * 60 * 6 })
+
+    // HTTP-Only Cookie
+    res.cookie('userAuth', token, {
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    })
 
     const { password: userPassword, ...userData } = result.toObject()
     res.status(200).json({
