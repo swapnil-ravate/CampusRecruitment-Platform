@@ -50,22 +50,22 @@ const Navbar = () => {
               <img src="/assets/logo2.png" alt="Logo" className="h-6 md:h-8 w-auto" />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg md:text-xl font-black tracking-tighter leading-none bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              <span className="text-lg md:text-xl font-semibold tracking-tighter leading-none bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                 Campus<span className="italic">Recruit</span>
               </span>
-              <span className="text-[8px] font-bold text-slate-400 tracking-[0.2em] uppercase">Talent Bridge</span>
+              <span className="text-[8px] font-semibold text-slate-400 tracking-[0.2em] uppercase">Talent Bridge</span>
             </div>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-2">
-            <li><NavLink end to='/' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-bold text-blue-600 border-b-2 border-blue-600' : ''}`}>Home</NavLink></li>
-            <li><NavLink to='/about' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-bold text-blue-600 border-b-2 border-blue-600' : ''}`}>About US</NavLink></li>
-            <li><NavLink to='/jobSection' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-bold text-blue-600 border-b-2 border-blue-600' : ''}`}>Jobs</NavLink></li>
-            <li><NavLink to='/entrepreneur' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-bold text-blue-600 border-b-2 border-blue-600' : ''}`}>Entrepreneur</NavLink></li>
-            <li><NavLink to='/higheredu' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-bold text-blue-600 border-b-2 border-blue-600' : ''}`}>Higher Education</NavLink></li>
-            <li><NavLink to='/contactus' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-bold text-blue-600 border-b-2 border-blue-600' : ''}`}>Contact US</NavLink></li>
-            {user && <li><NavLink end to={user.role === 'admin' ? '/admin' : user.role === 'teacher' ? '/teacher' : '/user'} className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-bold text-blue-600 border-b-2 border-blue-600' : ''}`}>Dashboard</NavLink></li>}
+            <li><NavLink end to='/' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-semibold text-blue-600 border-b-2 border-blue-600' : ''}`}>Home</NavLink></li>
+            <li><NavLink to='/about' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-semibold text-blue-600 border-b-2 border-blue-600' : ''}`}>About US</NavLink></li>
+            <li><NavLink to='/jobSection' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-semibold text-blue-600 border-b-2 border-blue-600' : ''}`}>Jobs</NavLink></li>
+            <li><NavLink to='/entrepreneur' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-semibold text-blue-600 border-b-2 border-blue-600' : ''}`}>Entrepreneur</NavLink></li>
+            <li><NavLink to='/higheredu' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-semibold text-blue-600 border-b-2 border-blue-600' : ''}`}>Higher Education</NavLink></li>
+            <li><NavLink to='/contactus' className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-semibold text-blue-600 border-b-2 border-blue-600' : ''}`}>Contact US</NavLink></li>
+            {user && <li><NavLink end to={user.role === 'admin' ? '/admin' : user.role === 'teacher' ? '/teacher' : '/user'} className={({ isActive }) => `text-lg font-medium hover:text-blue-600 transition-all ${isActive ? 'font-semibold text-blue-600 border-b-2 border-blue-600' : ''}`}>Dashboard</NavLink></li>}
           </ul>
         </div>
         <div className="navbar-end gap-2">

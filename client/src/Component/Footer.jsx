@@ -12,8 +12,8 @@ const Footer = () => {
       <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
       <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-700"></div>
 
-      <div className="container mx-auto px-6 pt-20 pb-10 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
+      <div className="container mx-auto px-6 pt-6 pb-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8">
           {/* Brand Identity Section */}
           <div className="md:col-span-4 space-y-6">
             <div className="flex items-center gap-3 group cursor-pointer">
@@ -21,10 +21,10 @@ const Footer = () => {
                 <img src="/assets/logo2.png" alt="Logo" className="h-8 w-auto" />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-black text-white tracking-tighter leading-none">
+                <span className="text-2xl font-semibold text-white tracking-tighter leading-none">
                   Campus<span className="text-primary italic">Recruit</span>
                 </span>
-                <span className="text-[9px] text-slate-500 uppercase tracking-[0.3em] font-bold mt-1">Future Ready</span>
+                <span className="text-[9px] text-slate-500 uppercase tracking-[0.3em] font-semibold mt-1">Future Ready</span>
               </div>
             </div>
             <p className="text-slate-400 text-[15px] leading-relaxed max-w-sm font-medium opacity-80">
@@ -53,7 +53,7 @@ const Footer = () => {
           {/* Navigation Links Grid */}
           <div className="md:col-span-5 grid grid-cols-2 gap-12">
             <div className="space-y-8">
-              <h4 className="text-white font-black text-xs uppercase tracking-[0.25em] relative inline-block pb-2">
+              <h4 className="text-white font-semibold text-xs uppercase tracking-[0.25em] relative inline-block pb-2">
                 Solutions
                 <span className="absolute bottom-0 left-0 w-8 h-[2px] bg-primary"></span>
               </h4>
@@ -69,7 +69,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="space-y-8">
-              <h4 className="text-white font-black text-xs uppercase tracking-[0.25em] relative inline-block pb-2">
+              <h4 className="text-white font-semibold text-xs uppercase tracking-[0.25em] relative inline-block pb-2">
                 Company
                 <span className="absolute bottom-0 left-0 w-8 h-[2px] bg-secondary"></span>
               </h4>
@@ -84,7 +84,7 @@ const Footer = () => {
 
           {/* Elite Newsletter Section */}
           <div className="md:col-span-3 space-y-8 p-8 bg-white/[0.02] rounded-[2rem] border border-white/5 backdrop-blur-sm">
-            <h4 className="text-white font-black text-xs uppercase tracking-[0.25em] text-center">Join the Vanguard</h4>
+            <h4 className="text-white font-semibold text-xs uppercase tracking-[0.25em] text-center">Join the Vanguard</h4>
             <p className="text-slate-500 text-sm text-center font-medium">Be the first to secure elite roles and exclusive insights.</p>
             <form className="relative group">
               <input
@@ -100,9 +100,9 @@ const Footer = () => {
         </div>
 
         {/* Sophisticated Bottom Bar */}
-        <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-slate-600 text-[13px] font-medium tracking-wide">
-            © 2024 <span className="text-slate-400 font-bold">Campus Recruitment</span>. Defined by impact.
+            © 2025 <span className="text-slate-400 font-semibold">Campus Recruitment</span>. Defined by impact.
           </p>
           <div className="flex gap-10 text-[13px] font-medium text-slate-600">
             <a href="#" className="hover:text-white transition-colors duration-300 underline-offset-4 hover:underline">Accessibility</a>

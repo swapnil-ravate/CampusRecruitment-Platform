@@ -64,7 +64,7 @@ const ContactUs = () => {
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 text-blue-600 font-bold text-xs uppercase tracking-widest mb-6">
                         <FaEnvelope className="text-sm" /> Support Hub
                     </div>
-                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6 tracking-tight">
+                    <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
                         We're Here to <span className="text-blue-600">Help</span>
                     </h1>
                     <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
@@ -79,7 +79,7 @@ const ContactUs = () => {
                     {/* Contact Info Column */}
                     <div className="w-full lg:w-1/3 space-y-6">
                         <div className="bg-white rounded-3xl shadow-xl p-8 border border-gray-100">
-                            <h3 className="text-2xl font-bold text-gray-900 mb-8 border-l-4 border-blue-600 pl-4">Contact Information</h3>
+                            <h3 className="text-2xl font-semibold text-gray-900 mb-8 border-l-4 border-blue-600 pl-4">Contact Information</h3>
 
                             <div className="space-y-8">
                                 <div className="group flex items-start gap-4">
@@ -87,36 +87,36 @@ const ContactUs = () => {
                                         <FaMapMarkerAlt />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-gray-800">Our Location</h4>
-                                        <p className="text-gray-500 text-sm mt-1">Training & Placement Office, Deogiri College, Chhatrapati SambhajiNagar</p>
+                                        <h4 className="font-semibold text-gray-800">Our Location</h4>
+                                        <p className="text-gray-500 text-sm mt-1">Vishwakarma University, Pune, Maharashtra, India</p>
                                     </div>
                                 </div>
 
                                 <div className="group flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 shadow-sm">
                                         <FaEnvelope />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-gray-800">Email & Support</h4>
-                                        <p className="text-gray-500 text-sm mt-1">connect@deogiricampus.com</p>
-                                        <p className="text-gray-500 text-sm">support@placement.com</p>
+                                        <h4 className="font-semibold text-gray-800">Email & Support</h4>
+                                        <p className="text-gray-500 text-sm mt-1">admissions@vupune.ac.in</p>
+                                        <p className="text-gray-500 text-sm">connect@vupune.ac.in</p>
                                     </div>
                                 </div>
 
                                 <div className="group flex items-start gap-4">
-                                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm">
+                                    <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 shadow-sm">
                                         <FaPhoneAlt />
                                     </div>
                                     <div>
-                                        <h4 className="font-bold text-gray-800">Call Us</h4>
-                                        <p className="text-gray-500 text-sm mt-1">+91 240 2367333</p>
-                                        <p className="text-gray-500 text-sm">+91 987 654 3210</p>
+                                        <h4 className="font-semibold text-gray-800">Call Us</h4>
+                                        <p className="text-gray-500 text-sm mt-1">+91 90670 02223</p>
+                                        <p className="text-gray-500 text-sm">+91 90670 02224</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div className="mt-12 pt-8 border-t border-gray-100">
-                                <h4 className="font-bold text-gray-800 mb-4">Follow Our Socials</h4>
+                                <h4 className="font-semibold text-gray-800 mb-4">Follow Our Socials</h4>
                                 <div className="flex gap-4">
                                     <a href="#" className="w-10 h-10 bg-gray-50 text-gray-400 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all"><FaLinkedin /></a>
                                     <a href="#" className="w-10 h-10 bg-gray-50 text-gray-400 rounded-xl flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all"><FaTwitter /></a>
@@ -128,11 +128,11 @@ const ContactUs = () => {
                         {/* Quick Stats or Note */}
                         <div className="bg-gradient-to-br from-indigo-600 to-blue-700 rounded-3xl p-8 text-white shadow-lg">
                             <FaQuestionCircle className="text-4xl opacity-20 mb-4" />
-                            <h4 className="text-xl font-bold mb-2">Need a faster answer?</h4>
+                            <h4 className="text-xl font-semibold mb-2">Need a faster answer?</h4>
                             <p className="text-blue-100 text-sm leading-relaxed mb-4">
                                 Most queries about recruitment can be found in our FAQ section or in the student dashboard resources.
                             </p>
-                            <a href="#faq" className="text-white font-black flex items-center gap-2 hover:gap-4 transition-all">Check FAQs <FaArrowRight /></a>
+                            <a href="#faq" className="text-white font-semibold flex items-center gap-2 hover:gap-4 transition-all">Check FAQs <FaArrowRight /></a>
                         </div>
                     </div>
 
@@ -142,13 +142,13 @@ const ContactUs = () => {
                             {/* Subtle Decorative Gradient */}
                             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 opacity-50 blur-2xl"></div>
 
-                            <h3 className="text-3xl font-black text-gray-900 mb-2 relative z-10">Send us a Message</h3>
+                            <h3 className="text-3xl font-semibold text-gray-900 mb-2 relative z-10">Send us a Message</h3>
                             <p className="text-gray-500 mb-10 text-lg relative z-10">We aim to respond to all inquiries within 24 business hours.</p>
 
                             <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div className="space-y-3">
-                                        <label htmlFor="name" className="text-sm font-black text-gray-700 uppercase tracking-widest pl-1">Full Name</label>
+                                        <label htmlFor="name" className="text-sm font-semibold text-gray-700 uppercase tracking-widest pl-1">Full Name</label>
                                         <div className="relative group/input">
                                             <FaUser className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within/input:text-blue-600 transition-colors" />
                                             <input
@@ -163,7 +163,7 @@ const ContactUs = () => {
                                         </div>
                                     </div>
                                     <div className="space-y-3">
-                                        <label htmlFor="email" className="text-sm font-black text-gray-700 uppercase tracking-widest pl-1">Email Address</label>
+                                        <label htmlFor="email" className="text-sm font-semibold text-gray-700 uppercase tracking-widest pl-1">Email Address</label>
                                         <div className="relative group/input">
                                             <FaEnvelope className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within/input:text-blue-600 transition-colors" />
                                             <input
@@ -180,7 +180,7 @@ const ContactUs = () => {
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label htmlFor="subject" className="text-sm font-black text-gray-700 uppercase tracking-widest pl-1">Subject</label>
+                                    <label htmlFor="subject" className="text-sm font-semibold text-gray-700 uppercase tracking-widest pl-1">Subject</label>
                                     <div className="relative group/input">
                                         <MdOutlineSubject className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400 text-xl group-focus-within/input:text-blue-600 transition-colors pointer-events-none" />
                                         <select
@@ -203,7 +203,7 @@ const ContactUs = () => {
                                 </div>
 
                                 <div className="space-y-3">
-                                    <label htmlFor="message" className="text-sm font-black text-gray-700 uppercase tracking-widest pl-1">Your Message</label>
+                                    <label htmlFor="message" className="text-sm font-semibold text-gray-700 uppercase tracking-widest pl-1">Your Message</label>
                                     <div className="relative group/input">
                                         <FaPaperPlane className="absolute left-6 top-6 text-gray-400 group-focus-within/input:text-blue-600 transition-colors" />
                                         <textarea
@@ -221,7 +221,7 @@ const ContactUs = () => {
                                 <button
                                     type="submit"
                                     disabled={isSubmitting}
-                                    className={`w-full md:w-auto px-12 py-5 rounded-2xl text-white font-black text-lg shadow-xl shadow-blue-200 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 relative overflow-hidden group/btn ${isSubmitting ? 'bg-gray-400 cursor-not-allowed shadow-none' : 'bg-blue-600 hover:bg-blue-700'
+                                    className={`w-full md:w-auto px-12 py-5 rounded-2xl text-white font-semibold text-lg shadow-xl shadow-blue-200 transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 relative overflow-hidden group/btn ${isSubmitting ? 'bg-gray-400 cursor-not-allowed shadow-none' : 'bg-blue-600 hover:bg-blue-700'
                                         }`}
                                 >
                                     {isSubmitting ? (
@@ -242,7 +242,7 @@ const ContactUs = () => {
                 {/* FAQ Section */}
                 <div id="faq" className="mt-24 max-w-4xl mx-auto">
                     <div className="text-center mb-16">
-                        <h2 className="text-4xl font-black text-gray-900 mb-4">Frequently Asked Questions</h2>
+                        <h2 className="text-4xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h2>
                         <p className="text-gray-500 text-lg">Quick answers to common questions from students and recruiters.</p>
                     </div>
 
@@ -253,7 +253,7 @@ const ContactUs = () => {
                                     onClick={() => toggleFaq(index)}
                                     className="w-full px-8 py-6 text-left flex justify-between items-center transition-all hover:bg-gray-50"
                                 >
-                                    <span className="font-bold text-gray-800 text-lg">{faq.question}</span>
+                                    <span className="font-semibold text-gray-800 text-lg">{faq.question}</span>
                                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${activeFaq === index ? 'bg-blue-600 text-white rotate-180' : 'bg-gray-100 text-gray-400'}`}>
                                         {activeFaq === index ? <FaMinus className="text-xs" /> : <FaPlus className="text-xs" />}
                                     </div>

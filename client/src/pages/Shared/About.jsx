@@ -14,7 +14,7 @@ const About = () => {
                     <p className="text-blue-600 font-semibold tracking-wide uppercase">
                         Welcome to Campus Recruitment
                     </p>
-                    <h2 className="text-3xl font-extrabold md:text-5xl mt-2 text-gray-900">
+                    <h2 className="text-3xl font-semibold md:text-5xl mt-2 text-gray-900">
                         Bridging Talent & Opportunity
                     </h2>
                     <div className="flex w-24 mt-4 mb-6 overflow-hidden rounded mx-auto">
@@ -43,7 +43,7 @@ const About = () => {
 
                     {/* Content Section */}
                     <div className="w-full lg:w-1/2">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-6 border-l-4 border-blue-600 pl-4">
+                        <h3 className="text-2xl font-semibold text-gray-900 mb-6 border-l-4 border-blue-600 pl-4">
                             Empowering Your Career Journey
                         </h3>
                         <p className="mb-6 text-gray-600 leading-relaxed text-lg">
@@ -54,21 +54,21 @@ const About = () => {
                             <div className="flex items-start">
                                 <FaCheckCircle className="text-green-500 mt-1 mr-3 text-xl flex-shrink-0" />
                                 <div>
-                                    <h4 className="font-bold text-gray-800">Streamlined Process</h4>
+                                    <h4 className="font-semibold text-gray-800">Streamlined Process</h4>
                                     <p className="text-gray-500 text-sm">Efficient application and tracking system for all users.</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
                                 <FaCheckCircle className="text-green-500 mt-1 mr-3 text-xl flex-shrink-0" />
                                 <div>
-                                    <h4 className="font-bold text-gray-800">Top Opportunities</h4>
+                                    <h4 className="font-semibold text-gray-800">Top Opportunities</h4>
                                     <p className="text-gray-500 text-sm">Access to premium roles from verified companies.</p>
                                 </div>
                             </div>
                             <div className="flex items-start">
                                 <FaCheckCircle className="text-green-500 mt-1 mr-3 text-xl flex-shrink-0" />
                                 <div>
-                                    <h4 className="font-bold text-gray-800">Career Growth</h4>
+                                    <h4 className="font-semibold text-gray-800">Career Growth</h4>
                                     <p className="text-gray-500 text-sm">Tools and resources to enhance your professional profile.</p>
                                 </div>
                             </div>
@@ -88,21 +88,21 @@ const About = () => {
                         <div className="w-16 h-16 mx-auto bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-3xl mb-4">
                             <FaUserGraduate />
                         </div>
-                        <h4 className="text-4xl font-bold text-gray-800">500+</h4>
+                        <h4 className="text-4xl font-semibold text-gray-800">500+</h4>
                         <p className="text-gray-500 font-medium">Students Placed</p>
                     </div>
                     <div className="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-purple-500 text-center hover:scale-105 transition-transform">
                         <div className="w-16 h-16 mx-auto bg-purple-50 text-purple-600 rounded-full flex items-center justify-center text-3xl mb-4">
                             <FaBriefcase />
                         </div>
-                        <h4 className="text-4xl font-bold text-gray-800">50+</h4>
+                        <h4 className="text-4xl font-semibold text-gray-800">50+</h4>
                         <p className="text-gray-500 font-medium">Partner Companies</p>
                     </div>
                     <div className="bg-white p-8 rounded-2xl shadow-lg border-b-4 border-green-500 text-center hover:scale-105 transition-transform">
                         <div className="w-16 h-16 mx-auto bg-green-50 text-green-600 rounded-full flex items-center justify-center text-3xl mb-4">
                             <FaUniversity />
                         </div>
-                        <h4 className="text-4xl font-bold text-gray-800">20+</h4>
+                        <h4 className="text-4xl font-semibold text-gray-800">20+</h4>
                         <p className="text-gray-500 font-medium">Universities</p>
                     </div>
                 </div>

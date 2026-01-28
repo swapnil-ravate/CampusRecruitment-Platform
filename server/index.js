@@ -1,4 +1,5 @@
 const express = require("express")
+const path = require("path")
 const mongoose = require("mongoose")
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
@@ -29,9 +30,24 @@ app.use('/api/v1/auth', require('./routes/authroute'))
 app.use('/api/v1/admin', require('./routes/adminRoute'))
 app.use('/api/v1/user', require('./routes/userRoute'))
 // 404
-app.use("*", (req, res) => {
+// 404 for API routes
+app.use("/api/*", (req, res) => {
     res.status(404).json({ message: "resource not found" })
 })
+
+// Serve static files in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../client/dist')))
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../client/dist/index.html'))
+    })
+} else {
+    // Basic 404 for non-production/non-API
+    app.use("*", (req, res) => {
+        res.status(404).json({ message: "resource not found" })
+    })
+}
 // Error Handlers
 app.use((err, req, res, next) => {
     console.log(err)

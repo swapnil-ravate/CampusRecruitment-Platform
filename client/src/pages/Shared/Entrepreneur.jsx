@@ -97,7 +97,7 @@ const Entrepreneur = () => {
                     />
                 </div>
                 <div className="container mx-auto px-6 relative z-10 text-white">
-                    <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-fade-in-up">Empowering Next-Gen Entrepreneurs</h1>
+                    <h1 className="text-4xl md:text-6xl font-semibold mb-4 animate-fade-in-up">Empowering Next-Gen Entrepreneurs</h1>
                     <p className="text-xl text-blue-100 max-w-2xl mb-8">
                         Explore government initiatives and schemes designed to help your startup flourish and grow.
                     </p>
@@ -107,7 +107,7 @@ const Entrepreneur = () => {
             <div className="container mx-auto px-6 py-12">
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-10 gap-6">
                     <div>
-                        <h2 className="text-3xl font-bold text-gray-800">Government Schemes</h2>
+                        <h2 className="text-3xl font-semibold text-gray-800">Government Schemes</h2>
                         <p className="text-gray-500 mt-1">Discover opportunities tailored for your vision</p>
                     </div>
 
@@ -132,9 +132,9 @@ const Entrepreneur = () => {
                         <button
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
-                            className={`px-6 py-2 rounded-full font-medium transition-all ${activeCategory === cat
-                                    ? 'bg-blue-600 text-white shadow-lg'
-                                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                            className={`px-6 py-2 rounded-full font-semibold transition-all ${activeCategory === cat
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                                 }`}
                         >
                             {cat}
@@ -151,8 +151,8 @@ const Entrepreneur = () => {
                                     {scheme.icon}
                                 </div>
                                 <div className="mb-4">
-                                    <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">{scheme.category}</span>
-                                    <h3 className="text-2xl font-bold text-gray-800 mt-1">{scheme.title}</h3>
+                                    <span className="text-xs font-semibold text-blue-600 uppercase tracking-widest">{scheme.category}</span>
+                                    <h3 className="text-2xl font-semibold text-gray-800 mt-1">{scheme.title}</h3>
                                 </div>
                                 <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3">
                                     {scheme.description}
@@ -161,7 +161,7 @@ const Entrepreneur = () => {
                                     href={scheme.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center text-blue-600 font-bold hover:gap-2 transition-all gap-1"
+                                    className="inline-flex items-center text-blue-600 font-semibold hover:gap-2 transition-all gap-1"
                                 >
                                     Visit Official Site <FaExternalLinkAlt className="text-xs" />
                                 </a>
@@ -171,7 +171,7 @@ const Entrepreneur = () => {
                 ) : (
                     <div className="text-center py-20 bg-gray-50 rounded-3xl border-2 border-dashed border-gray-200">
                         <div className="text-gray-300 text-6xl mb-4 flex justify-center"><FaSearch /></div>
-                        <h3 className="text-xl font-bold text-gray-700">No schemes found</h3>
+                        <h3 className="text-xl font-semibold text-gray-700">No schemes found</h3>
                         <p className="text-gray-500 mt-2">Try adjusting your filters or search keywords.</p>
                     </div>
                 )}
