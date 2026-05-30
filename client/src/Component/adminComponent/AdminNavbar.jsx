@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useLogoutMutation } from '../../redux/api/authApi'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 
 const AdminNavbar = () => {
@@ -14,7 +15,7 @@ const AdminNavbar = () => {
   useEffect(() => {
     if (isSuccess) {
       navigate('/')
-      toast("Admin Logout Successfully")
+      toast.success("Admin Logout Successfully")
     }
   }, [isSuccess, navigate])
   return (

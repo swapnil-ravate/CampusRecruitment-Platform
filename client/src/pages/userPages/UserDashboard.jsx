@@ -69,7 +69,7 @@ const UserDashboard = () => {
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
                       <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors">{job.company}</h3>
-                      <p className="text-gray-600 font-medium">{job.title}</p>
+                      <p className="text-gray-600 font-medium">{job.jobTitle}</p>
 
                       <div className="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
                         <div className="flex items-center gap-1">

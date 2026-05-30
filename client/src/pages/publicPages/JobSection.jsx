@@ -8,7 +8,6 @@ const JobSection = () => {
     <>
       <Navbar />
       <div className="min-h-screen bg-gray-50 pt-8 pb-16">
-        {/* <div className="container mx-auto px-4"> */}
         {/* Hero Section */}
         <div className="relative pt-8 pb-12 flex items-center overflow-hidden">
 

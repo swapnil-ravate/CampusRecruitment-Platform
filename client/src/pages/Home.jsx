@@ -14,7 +14,6 @@ const Home = () => {
     <JobCard />
     <Testimonial />
     <Footer /> 
-    {/* <JobSection /> */}
   </>
   
 }

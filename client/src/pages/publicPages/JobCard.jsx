@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useJobs } from '../../hooks/useJobs';
+import { useGetAllJobsQuery } from '../../redux/api/userApi';
 import { FaMapMarkerAlt, FaMoneyBillWave, FaBriefcase, FaCalendarAlt, FaSearch } from 'react-icons/fa';
 import Loading from '../../components/ui/Loading';
 import EmptyState from '../../components/ui/EmptyState';
@@ -9,7 +9,7 @@ import ErrorState from '../../components/ui/ErrorState';
 
 const JobCard = ({ isHomePage = true }) => {
     const { user } = useSelector(state => state.user);
-    const { data: jobs, isLoading, isError, error } = useJobs();
+    const { data: jobs, isLoading, isError, error } = useGetAllJobsQuery();
     const [searchTerm, setSearchTerm] = useState('');
     const [filterLocation, setFilterLocation] = useState('');
 

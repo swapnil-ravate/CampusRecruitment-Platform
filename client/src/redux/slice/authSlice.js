@@ -24,5 +24,4 @@ const authSlice = createSlice({
 
 })
 
-// export const { invalidate } = authSlice.actions
 export default authSlice.reducer

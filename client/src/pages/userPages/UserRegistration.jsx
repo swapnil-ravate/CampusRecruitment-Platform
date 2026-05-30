@@ -281,6 +281,7 @@ const UserRegistration = () => {
                   <option value="">Select Role</option>
                   <option value="user">Student</option>
                   <option value="teacher">Teacher</option>
+                  <option value="admin">Admin</option>
                 </select>
                 {formik.touched.role && formik.errors.role && (
                   <p className="mt-1 text-xs text-red-600">{formik.errors.role}</p>

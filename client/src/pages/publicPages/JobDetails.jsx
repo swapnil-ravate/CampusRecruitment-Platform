@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../Component/Navbar';
 import Footer from '../../Component/Footer';
-import { useJobs } from '../../hooks/useJobs';
+import { useGetAllJobsQuery } from '../../redux/api/userApi';
 import { useParams, Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaMoneyBillWave, FaBriefcase, FaBuilding, FaArrowLeft, FaCalendarAlt, FaTools } from 'react-icons/fa';
 import Loading from '../../components/ui/Loading';
@@ -9,7 +9,7 @@ import ErrorState from '../../components/ui/ErrorState';
 
 const JobDetails = () => {
     const { id } = useParams();
-    const { data: jobs, isLoading, isError, error } = useJobs();
+    const { data: jobs, isLoading, isError, error } = useGetAllJobsQuery();
 
     // Find the specific job
     const job = jobs?.find(j => j._id === id);

@@ -3,9 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useLogoutMutation } from '../redux/api/authApi'
-import { FaUser } from "react-icons/fa";
-import { toast } from 'react-toastify'
-import theme from '../theme'
+import { toast } from 'react-hot-toast'
 
 const Navbar = () => {
   const { user } = useSelector(state => state.user)
@@ -15,14 +13,10 @@ const Navbar = () => {
     logout()
   }
 
+  // Merged duplicate useEffects into one
   useEffect(() => {
     if (isSuccess) {
       toast.success("Logout Successful")
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isSuccess) {
       navigate('/')
     }
   }, [isSuccess])
@@ -40,7 +34,8 @@ const Navbar = () => {
               <li><NavLink end to='/' className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
               <li><NavLink to='/about' className={({ isActive }) => isActive ? 'active' : ''}>About US</NavLink></li>
               <li><NavLink to='/jobSection' className={({ isActive }) => isActive ? 'active' : ''}>Jobs</NavLink></li>
-              <li><NavLink to='/enterprenuer' className={({ isActive }) => isActive ? 'active' : ''}>EnterPrenuer</NavLink></li>
+              {/* Fixed typo: /enterprenuer → /entrepreneur */}
+              <li><NavLink to='/entrepreneur' className={({ isActive }) => isActive ? 'active' : ''}>Entrepreneur</NavLink></li>
               <li><NavLink to='/higheredu' className={({ isActive }) => isActive ? 'active' : ''}>Higher Education</NavLink></li>
               <li><NavLink to='/contactus' className={({ isActive }) => isActive ? 'active' : ''}>Contact US</NavLink></li>
             </ul>
@@ -69,23 +64,16 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end gap-2">
-          {/* Register */}
-          {/* <Link to='/userRegister'> <button className='btn btn-warning' >Register </button> </Link> */}
-
-          {/* Login */}
           {
             user ? <div className='flex gap-2 items-center'>
-              <button onClick={handleLogout} className={`btn btn-${theme.btn}`}>Logout</button>
+              <button onClick={handleLogout} className="btn btn-success">Logout</button>
             </div>
-              : <Link to='/userLogin'> <button className={`btn btn-${theme.btn}`} >SignIn</button></Link>
+              : <Link to='/userLogin'> <button className="btn btn-success">SignIn</button></Link>
           }
-
-
         </div>
       </div>
 
     </div>
-
 
 
   </>

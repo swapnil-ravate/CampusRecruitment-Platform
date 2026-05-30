@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-// import { getAllJobs } from "../../../../server/controllers/userController"
 
 export const userApi = createApi({
     reducerPath: "userApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:5000/api/v1/user",
+        baseUrl: `${import.meta.env.VITE_API_URL || "http://localhost:5000/api/v1"}/user`,
         credentials: 'include'
     }),
     tagTypes: ["userApi"],

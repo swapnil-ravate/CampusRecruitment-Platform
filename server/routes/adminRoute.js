@@ -1,8 +1,10 @@
-// const router = require('./authroute')
-
 const { adminJobPost, getAdminStats, deleteJob, getAllUsers, deleteUser } = require('../controllers/adminController')
+const { userVerification } = require('../middleware/authMiddleWare')
 
 const router = require('express').Router()
+
+// All admin routes require authentication
+router.use(userVerification)
 
 router
     .post("/jobPost", adminJobPost)
@@ -11,4 +13,4 @@ router
     .get("/users", getAllUsers)
     .delete("/user/delete/:id", deleteUser)
 
-module.exports = router    
+module.exports = router

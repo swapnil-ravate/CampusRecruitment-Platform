@@ -5,7 +5,7 @@ exports.registerSchema = z.object({
         name: z.string().min(2, "Name is required"),
         email: z.string().email("Invalid email address"),
         password: z.string().min(6, "Password must be at least 6 characters"),
-        role: z.enum(["student", "recruiter", "admin", "teacher"]).optional(), // precise roles
+        role: z.enum(["user", "teacher", "admin"]).optional(), // must match Mongoose model enum
         number: z.string().min(10, "Valid number required"),
     }),
 });

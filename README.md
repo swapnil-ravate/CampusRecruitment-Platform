@@ -521,30 +521,95 @@ MONGO_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/campus_recruit
 
 ---
 
-## 🚀 Deployment
+## 🚀 Deployment on Vercel
 
-### **Frontend Deployment (Vercel/Netlify)**
+This project is deployed as **two separate Vercel projects** — one for the backend API and one for the React frontend. This is the recommended approach for MERN apps on Vercel.
 
-#### Vercel
+---
+
+### Step 1 — Deploy the Backend (API)
+
+The `server/` directory is a **Node.js Serverless Function** on Vercel.
+
+#### 1.1 Create a new Vercel project for the backend
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project**
+2. Import your Git repository
+3. Set the **Root Directory** to `server`
+4. Vercel will auto-detect it as a Node.js project
+
+#### 1.2 Set environment variables
+
+In Vercel dashboard → Project Settings → **Environment Variables**, add:
+
+| Variable | Value |
+|----------|-------|
+| `MONGO_URL` | Your **MongoDB Atlas** connection string (e.g. `mongodb+srv://user:pass@cluster.mongodb.net/campus`) |
+| `JWT_KEY` | A long random secret (generate with: `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"`) |
+| `CLIENT_URL` | Your frontend Vercel URL (e.g. `https://campus-recruitment.vercel.app`) — set after Step 2 |
+| `NODE_ENV` | `production` |
+
+> ⚠️ **MONGO_URL must be a MongoDB Atlas URL** (`mongodb+srv://...`). Local MongoDB (`localhost`) will not work on Vercel.
+
+#### 1.3 Deploy
+
+Click **Deploy**. Note your backend URL (e.g. `https://campus-api.vercel.app`).
+
+---
+
+### Step 2 — Deploy the Frontend (React)
+
+The `client/` directory is a **Vite SPA** deployed as a static site.
+
+#### 2.1 Create a new Vercel project for the frontend
+
+1. Go to [vercel.com](https://vercel.com) → **Add New Project**
+2. Import the same Git repository
+3. Set the **Root Directory** to `client`
+4. Framework Preset: **Vite**
+5. Build Command: `npm run build` (auto-detected)
+6. Output Directory: `dist` (auto-detected)
+
+#### 2.2 Set environment variables
+
+| Variable | Value |
+|----------|-------|
+| `VITE_API_URL` | `https://<your-backend-app>.vercel.app/api/v1` |
+
+#### 2.3 Deploy
+
+Click **Deploy**. Note your frontend URL (e.g. `https://campus-recruitment.vercel.app`).
+
+---
+
+### Step 3 — Link the two projects
+
+1. Go back to your **backend** Vercel project
+2. Update the `CLIENT_URL` environment variable to your **frontend URL**
+3. Redeploy the backend (Deployments → Redeploy)
+
+---
+
+### ✅ Post-Deploy Checklist
+
+- [ ] Test user registration → login → view jobs
+- [ ] Test admin login → create a job posting
+- [ ] Verify cookies are sent (HTTPS + `sameSite: none` + `secure: true`)
+- [ ] Check the browser console for any CORS errors
+- [ ] Seed an admin account: run `node seedAdmin.js` locally pointing to your Atlas DB
+
+---
+
+### Seeding Admin Locally (pointing to Atlas)
+
 ```bash
-cd client
-npm run build
-# Follow Vercel deployment instructions
+cd server
+# Temporarily set MONGO_URL in your shell:
+$env:MONGO_URL="mongodb+srv://..."   # PowerShell
+node seedAdmin.js
 ```
 
-#### Netlify
-```bash
-cd client
-npm run build
-# Deploy the 'dist' folder to Netlify
-```
 
-### **Backend Deployment (Heroku/Railway/Render)**
-
-#### Environment Variables for Production
-- Set `MONGO_URL` to your MongoDB Atlas connection string
-- Set `JWT_SECRET` to a strong, unique secret
-- Set `NODE_ENV=production`
 
 ---
 
