@@ -8,18 +8,87 @@ require("dotenv").config()
 
 const app = express()
 
+// ─── Database Connection (singleton for serverless cold starts) ────────────────
+const globalCache = global.__MONGO_CONN__ || { conn: null, promise: null }
+global.__MONGO_CONN__ = globalCache
+
+const connectDB = async () => {
+    if (globalCache.conn && mongoose.connection.readyState === 1) {
+        return globalCache.conn
+    }
+
+    if (!process.env.MONGO_URL) {
+        throw new Error("MONGO_URL is not configured")
+    }
+
+    if (!globalCache.promise) {
+        globalCache.promise = mongoose.connect(process.env.MONGO_URL).then((conn) => {
+            console.log("MongoDB Connected")
+            return conn
+        }).catch((err) => {
+            globalCache.promise = null
+            throw err
+        })
+    }
+
+    globalCache.conn = await globalCache.promise
+    return globalCache.conn
+}
+
+const parseAllowedOrigins = () => {
+    const configuredOrigins = [
+        process.env.CLIENT_URL,
+        ...(process.env.CLIENT_URLS || "")
+            .split(",")
+            .map((origin) => origin.trim())
+            .filter(Boolean)
+    ]
+
+    if (process.env.VERCEL_URL) {
+        configuredOrigins.push(`https://${process.env.VERCEL_URL}`)
+    }
+    if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+        configuredOrigins.push(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`)
+    }
+
+    return [...new Set(configuredOrigins)]
+}
+
+const allowedOrigins = parseAllowedOrigins()
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Allow non-browser or same-origin requests without Origin header.
+        if (!origin) return callback(null, true)
+        if (allowedOrigins.includes(origin)) return callback(null, true)
+        return callback(null, false)
+    },
+    credentials: true
+}
+
 // ─── Middlewares ───────────────────────────────────────────────────────────────
 app.use(express.json())
 app.use(cookieParser())
 
-app.use(cors({
-    origin: [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        process.env.CLIENT_URL
-    ].filter(Boolean),
-    credentials: true
-}))
+app.use(cors(corsOptions))
+app.options("*", cors(corsOptions))
+
+// Lightweight health check endpoint for uptime/verification.
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "ok" })
+})
+
+// Database connection middleware for API routes in serverless environment
+app.use("/api", async (req, res, next) => {
+    try {
+        await connectDB()
+        next()
+    } catch (err) {
+        console.error("Database connection middleware error:", err)
+        res.status(500).json({
+            message: "Database connection failed"
+        })
+    }
+})
 
 // ─── Routes ────────────────────────────────────────────────────────────────────
 app.use('/api/v1/auth', require('./routes/authroute'))
@@ -47,21 +116,6 @@ if (process.env.NODE_ENV === 'production' && process.env.SERVE_STATIC === 'true'
 // ─── Error Handler ─────────────────────────────────────────────────────────────
 app.use(require('./middleware/errorMiddleware'))
 
-// ─── Database Connection (singleton for serverless cold starts) ────────────────
-let isConnected = false
-
-const connectDB = async () => {
-    if (isConnected) return
-    try {
-        const conn = await mongoose.connect(process.env.MONGO_URL)
-        isConnected = conn.connections[0].readyState === 1
-        console.log("MongoDB Connected")
-    } catch (err) {
-        console.error("MongoDB Connection Error:", err)
-        throw err
-    }
-}
-
 // ─── Start Server (local dev only) ────────────────────────────────────────────
 // Vercel does NOT call listen() — it imports `app` directly as a serverless function
 if (process.env.NODE_ENV !== 'production') {
@@ -77,8 +131,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // ─── Serverless handler for Vercel ────────────────────────────────────────────
-// Vercel calls this exported function on each request
-module.exports = async (req, res) => {
-    await connectDB()
-    app(req, res)
-}
+module.exports = app
