@@ -7,6 +7,7 @@ exports.registerSchema = z.object({
         password: z.string().min(6, "Password must be at least 6 characters"),
         role: z.enum(["user", "teacher", "admin"]).optional(), // must match Mongoose model enum
         number: z.string().min(10, "Valid number required"),
+        education: z.string().optional(),
     }),
 });
 

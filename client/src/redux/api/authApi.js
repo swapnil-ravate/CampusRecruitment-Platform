@@ -29,8 +29,11 @@ export const authApi = createApi({
                     }
                 },
                 transformResponse: data => {
-                    sessionStorage.setItem("auth", JSON.stringify(data.result))
-                    return data.result
+                    if (data?.result) {
+                        sessionStorage.setItem("auth", JSON.stringify(data.result))
+                        return data.result
+                    }
+                    return data
                 },
                 invalidatesTags: ["authapi"]
             }),

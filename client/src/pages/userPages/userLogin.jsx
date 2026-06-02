@@ -5,6 +5,7 @@ import * as yup from 'yup'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import { useLoginMutation } from '../../redux/api/authApi'
+import { getErrorMessage } from '../../redux/api/getErrorMessage'
 import Navbar from '../../Component/Navbar'
 import Footer from '../../Component/Footer'
 import { IoMdEye, IoIosEyeOff } from "react-icons/io"
@@ -57,7 +58,7 @@ const UserLogin = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(error?.data?.message || 'Login failed. Please check your credentials and try again.')
+      toast.error(getErrorMessage(error, 'Login failed. Please check your credentials and try again.'))
     }
   }, [isError, error])
 

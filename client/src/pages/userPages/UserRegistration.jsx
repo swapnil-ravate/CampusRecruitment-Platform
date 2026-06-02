@@ -6,6 +6,7 @@ import Navbar from '../../Component/Navbar'
 import Footer from '../../Component/Footer'
 import { useNavigate } from 'react-router-dom'
 import { useRegisterMutation } from '../../redux/api/authApi'
+import { getErrorMessage } from '../../redux/api/getErrorMessage'
 import { toast } from 'react-hot-toast'
 import { IoMdEye, IoIosEyeOff } from "react-icons/io"
 
@@ -93,8 +94,7 @@ const UserRegistration = () => {
 
   useEffect(() => {
     if (isError && error) {
-      const errorMessage = error?.data?.message || error?.error || 'Registration failed. Please try again.'
-      toast.error(errorMessage)
+      toast.error(getErrorMessage(error, 'Registration failed. Please try again.'))
     }
   }, [isError, error])
 

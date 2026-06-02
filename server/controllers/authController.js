@@ -12,7 +12,7 @@ exports.register = asyncHandler(async (req, res) => {
         return res.status(409).json({ message: "User already exists" })
     }
     const hashPass = await bcrypt.hash(password, 10)
-    await User.create({ ...req.body, role: role || 'student', password: hashPass })
+    await User.create({ ...req.body, role: role || 'user', password: hashPass })
     res.status(201).json({ message: "User Register Success" })
 })
 

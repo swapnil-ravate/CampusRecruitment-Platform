@@ -51,7 +51,14 @@ const parseAllowedOrigins = () => {
         configuredOrigins.push(`https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`)
     }
 
-    return [...new Set(configuredOrigins)]
+    if (process.env.NODE_ENV !== "production") {
+        configuredOrigins.push(
+            "http://localhost:5173",
+            "http://127.0.0.1:5173"
+        )
+    }
+
+    return [...new Set(configuredOrigins.filter(Boolean))]
 }
 
 const allowedOrigins = parseAllowedOrigins()
